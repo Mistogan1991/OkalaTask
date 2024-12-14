@@ -18,13 +18,13 @@ namespace Api.ExternalServices
         {
             this._httpClient = httpClient;
             this._config = options.Value;
+            this._logger = logger;
         }
 
         public async Task<ExchangeRates> GetExchangeRatesAsync()
         {
             var endpoint = $"{_config.Endpoint}?symbols={_config.Symbols}&access_key={_config.ApiKey}";
             var response = await _httpClient.GetAsync(endpoint);
-
 
             if (!response.IsSuccessStatusCode)
             {
